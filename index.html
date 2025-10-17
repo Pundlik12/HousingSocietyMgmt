@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --accent-color: #1abc9c;
+      --input-bg: #f4f6f7;
+      --input-border: #ccc;
+      --text-color: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: var(--text-color);
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      width: 320px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      color: var(--primary-color);
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 12px 2px;
+      margin: 10px 0;
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      background-color: var(--input-bg);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .login-container input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .login-container button:hover {
+      background-color: #16a085;
+      transform: scale(1.02);
+    }
+
+    .login-container .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      margin: 10px 0;
+    }
+
+    .login-container label {
+      cursor: pointer;
+    }
+
+    .login-container .forgot-link {
+      text-align: right;
+      margin-top: 5px;
+    }
+
+    .login-container .forgot-link a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .login-container .forgot-link a:hover {
+      text-decoration: underline;
+    }
+
+    .login-container i {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2><i class="fas fa-user-circle"></i> Login</h2>
+    <input type="text" id="username" placeholder="Email ID" />
+    <input type="password" id="password" placeholder="Password" />
+    
+    <div class="options">
+      <label><input type="checkbox" id="rememberMe" /> Remember Me</label>
+      <label><input type="checkbox" onclick="togglePassword()" /> Show Password</label>
+    </div>
+
+    <!-- <button onclick="login()"><i class="fas fa-sign-in-alt"></i> Login</button> -->
+    <button id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+
+    <div class="forgot-link">
+      <a href="forgot-password.html">Forgot Password?</a>
+    </div>
+    
+    <div id="Progress">
+      <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  
+  <script type="module" src="login.js"></script>
+</body>
+</html>

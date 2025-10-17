@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>expenses</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <button id="toggleSidebar"><i class="fas fa-bars"></i></button>
+    <h1>Housing Society Management System</h1>
+    <div class="header-actions">
+      <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
+      <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </header>
+
+  <nav class="sidebar">
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
+
+      <li><a href="income.html"><i class="fa-solid fa-pen-fancy"></i></i> Incomes</a></li>
+      <li><a href="expense.html"><i class="fa-solid fa-notes-medical"></i></i> Expenses</a></li>
+      <li><a href="owners.html"><i class="fa-solid fa-child"></i></i> Owners</a></li>
+
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Expenses</h2>
+    <form id="ExpenseForm">
+      <label for="TrnDate">Trn Date:</label><br />
+      <input type="date" id="TrnDate" placeholder="Select Trn date"><br />
+      
+      <label for="PaymentMode">Payment Mode:</label><br />
+      <select id="PaymentMode">
+        <option value="Select" default>Select</option>
+        <option value="Cash">Cash</option>
+        <option value="GPay">GPay</option>
+        <option value="PhonePay">PhonePay</option>
+        <option value="BankTransfer">Bank Transfer</option>
+      </select><br />
+      
+      <label for="ReferenceNumber">Reference Number:</label><br />
+      <input type="text" id="ReferenceNumber" placeholder="Reference Number"><br />
+      
+      <label for="Amount">Amount:</label><br />
+      <input type="number" id="Amount" placeholder="Amount"><br />
+      
+      <label for="Comments">Comments:</label><br />
+      <input type="text" id="Comments" placeholder="Enter Comments"><br /><br />
+      
+      <button id="saveData" class="Button">Save</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Pandurang Apartment CHS Sonarpada</p>
+  </footer>
+
+  <script src="expense.js" type="module"></script>
+  <script src="script.js"></script>
+</body>
+</html>
