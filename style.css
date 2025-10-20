@@ -1,4 +1,5 @@
-:root {
+:root 
+{
   --bg-color: #ecf0f1;
   --text-color: #2c3e50;
   --header-bg: #2c3e50;
@@ -7,7 +8,8 @@
   --active-bg: #1abc9c;
 }
 
-body.dark-mode {
+body.dark-mode 
+{
   --bg-color: #2c3e50;
   --text-color: #ecf0f1;
   --header-bg: #1c2833;
@@ -16,7 +18,8 @@ body.dark-mode {
   --active-bg: #27ae60;
 }
 
-body {
+body 
+{
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   display: grid;
@@ -32,7 +35,8 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-header {
+header 
+{
   grid-area: header;
   background-color: var(--header-bg);
   color: white;
@@ -42,24 +46,28 @@ header {
   padding: 0 20px;
 }
 
-.header-actions {
+.header-actions 
+{
   display: flex;
   gap: 10px;
 }
 
-.sidebar {
+.sidebar 
+{
   grid-area: sidebar;
   background-color: var(--sidebar-bg);
-  padding: 20px;
+  /* padding: 20px; */
   transition: transform 0.3s ease;
 }
 
-.sidebar ul {
+.sidebar ul 
+{
   list-style: none;
   padding: 0;
 }
 
-.sidebar a {
+.sidebar a 
+{
   color: white;
   text-decoration: none;
   display: block;
@@ -68,12 +76,14 @@ header {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.sidebar a:hover {
+.sidebar a:hover 
+{
   background-color: var(--hover-bg);
   transform: scale(1.05);
 }
 
-.sidebar a.active {
+.sidebar a.active 
+{
   background-color: var(--active-bg);
 }
 
@@ -82,56 +92,64 @@ main {
   padding: 20px;
 }
 
-footer {
+footer 
+{
   grid-area: footer;
   background-color: #bdc3c7;
   text-align: center;
-  padding: 10px;
 }
 
-.container {
-  max-width: 400px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 8px; 
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+#toggleSidebar 
+{
+  font-size: 1.2rem;
+  margin-right: 10px;
 }
-input,select {
-  width: 80%;
+
+.input-row 
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 1%;
+}
+
+.input-row input,select 
+{
+  flex: 1;
+  min-width: 120px;
+  max-width: 100%;
   padding: 10px;
-  margin: 8px 0;
+  font-size: 16px;
   box-sizing: border-box;
 }
-.Button {
+
+.Button 
+{
   margin: 8px 0;
-  width: 80%;
+  width: 50%;
   padding: 10px;
   background: #007bff;
   color: white;
   border: none;
   cursor: pointer;
+  font-size: large;
 }
 
-.Button:hover {
+.Button:hover 
+{
   background: #eb3a58;
+} 
+
+.responsive-text 
+{
+  font-size: 24px;
+  /* color: black; */
 }
 
-/* button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-} */
-
-#toggleSidebar {
-  font-size: 1.2rem;
-  margin-right: 10px;
-}
-
-@media (max-width: 768px) {
-  body {
+@media (max-width: 768px)
+{
+  body 
+  {
     grid-template-areas:
       "header"
       "main"
@@ -141,23 +159,100 @@ input,select {
     grid-template-rows: 60px 1fr auto 40px;
   }
 
-  .sidebar {
+  .sidebar 
+  {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
   }
 
-  .sidebar ul {
+  .sidebar ul 
+  {
     display: flex;
     flex-direction: row;
     gap: 10px;
   }
 
-  .sidebar a {
+  .sidebar a 
+  {
     padding: 10px;
+  }
+  
+  .input-row 
+  {
+    flex-direction: column;
+  }
+
+  .responsive-text 
+  {
+    font-size: 16px;
+    /* color: blue; */
   }
 }
 
-.sidebar.collapsed {
+.sidebar.collapsed 
+{
   transform: translateX(-220px);
+}
+
+#dataTable 
+{
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#dataTable thead 
+{
+  background-color: #4CAF50; /* Header background color */
+  color: white;              /* Header text color */
+  /* background-color: #3498db;
+  color: white; */
+}
+
+#dataTable th, #dataTable td 
+{
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#dataTable tbody tr:hover 
+{
+  background-color: #f1f1f1;
+}
+
+.card-container 
+{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card 
+{
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover 
+{
+  transform: translateY(-5px);
+}
+
+.card h3 
+{
+  margin-top: 0;
+  color: #333;
+}
+
+.card p 
+{
+  color: #666;
+  line-height: 1.5;
 }

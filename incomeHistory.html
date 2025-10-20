@@ -35,49 +35,43 @@
   </nav>
 
   <main>
-    <h2>Welcome!</h2>
-    <div class="card-container">
-      <div class="card">
-        <h3>Total Incomes</h3>
-        <p>This is the first card. You can use it to highlight key information, stats, or features.</p>
+    <h2>Income History</h2>
+    <form id="IncomeHistoryForm">
+      <div class="input-row">
+        <label for="RoomNo">Room No</label>
+        <input type="text" id="RoomNo" placeholder="Enter Room No"/>
+        
+        <label for="fromDate">From date</label>
+        <input type="date" id="fromDate" placeholder="Select from date" />
       </div>
-      <div class="card">
-        <h3>Total Expenses</h3>
-        <p>This is the second card. It’s perfect for announcements, updates, or quick links.</p>
+      
+      <div class="input-row">
+        <button id="submitData" class="Button">Submit</button>
       </div>
-    </div>
-
-    <br>
-    <div class="input-row">
-      <label for="Chairperson">Chairperson</label>
-      <input type="text" id="Chairperson" placeholder="Chairperson">
-
-      <label for="SubChairperson">Sub-Chairperson</label>
-      <input type="text" id="SubChairperson" placeholder="Sub-Chairperson">
-    </div>
-
-    <div class="input-row">
-      <label for="Secretary">Secretary</label>
-      <input type="text" id="Secretary" placeholder="Secretary">
-
-      <label for="SubSecretary">Sub-Secretary</label>
-      <input type="text" id="SubSecretary" placeholder="Sub-Secretary">
-    </div>
-
-    <div class="input-row">
-      <label for="Treasurer">Treasurer</label>
-      <input type="text" id="Treasurer" placeholder="Treasurer">
-
-      <label for="SubTreasurer">Sub-Treasurer</label>
-      <input type="text" id="SubTreasurer" placeholder="Sub-Treasurer">
-    </div>
-
+    </form>
+    
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>RoomNo</th>
+          <th>TrnDate</th>
+          <th>PaymentMode</th>
+          <th>ReferenceNumber</th>
+          <th>Amount</th>
+          <th>Comments</th>
+          <th>CreatedDate</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    
   </main>
 
   <footer>
     <p>&copy; 2025 Pandurang Apartment CHS Sonarpada</p>
   </footer>
 
+  <script src="incomeHistory.js" type="module"></script>
   <script src="script.js"></script>
 </body>
 </html>

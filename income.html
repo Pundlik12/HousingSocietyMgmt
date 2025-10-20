@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>incomes</title>
+  <title>HSMS</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <header>
     <button id="toggleSidebar"><i class="fas fa-bars"></i></button>
-    <h1>Housing Society Management System</h1>
+    <h1 class="responsive-text">Housing Society Management System</h1>
     <div class="header-actions">
       <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
       <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -20,50 +20,52 @@
   <nav class="sidebar">
     <ul>
       <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
+      
+      <li><a href="income.html"><i class="fa-solid fa-pen-fancy"></i> Incomes</a></li>
+      <li><a href="incomeHistory.html"><i class="fa-solid fa-clock-rotate-left"></i> Income History</a></li>
 
-      <li><a href="income.html"><i class="fa-solid fa-pen-fancy"></i></i> Incomes</a></li>
-      <li><a href="expense.html"><i class="fa-solid fa-notes-medical"></i></i> Expenses</a></li>
-      <li><a href="owners.html"><i class="fa-solid fa-child"></i></i> Owners</a></li>
+      <li><a href="expense.html"><i class="fa-solid fa-notes-medical"></i> Expenses</a></li>
+      <li><a href="expenseHistory.html"><i class="fa-solid fa-clock-rotate-left"></i> Expenses History</a></li>
 
-      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
-      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="owners.html"><i class="fa-solid fa-child"></i> Owners</a></li>
+
+      <!-- <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li> -->
     </ul>
   </nav>
 
   <main>
-    <h2>Incomes</h2>
+    <h2>Create Incomes</h2>
     <form id="IncomeForm">
-      <label for="RoomNo">Room No:</label><br />
-      <input type="text" id="RoomNo" placeholder="Enter Room No" /><br />
+      <div class="input-row">
+        <input type="text" id="RoomNo" placeholder="Enter Room No""/>
+        <input type="text" id="OwnerName" readonly=true placeholder="Enter Owner Name" />
+      </div>
+
+      <div class="input-row">
+        <input type="number" id="MaintenanceAmount" readonly=true placeholder="Enter Maintenance Amount">
+        <input type="date" id="TrnDate" placeholder="Enter Transaction Date">
+      </div>
       
-      <label for="OwnerName">Owner Name:</label><br />
-      <input type="text" id="OwnerName" readonly=true placeholder="Enter Owner Name" /><br />
+      <div class="input-row">
+        <select id="PaymentMode">
+          <option value="Select" default>Select</option>
+          <option value="Cash">Cash</option>
+          <option value="GPay">GPay</option>
+          <option value="PhonePay">PhonePay</option>
+          <option value="BankTransfer">Bank Transfer</option>
+        </select>
+        <input type="text" id="ReferenceNumber" placeholder="Reference Number">
+      </div>
       
-      <label for="MaintenanceAmount">Maintenance Amount:</label><br />
-      <input type="number" id="MaintenanceAmount" readonly=true placeholder="Enter Maintenance Amount"><br />
-      
-      <label for="TrnDate">Trn Date:</label><br />
-      <input type="date" id="TrnDate" placeholder="Enter Transaction Date"><br />
-      
-      <label for="PaymentMode">Payment Mode:</label><br />
-      <select id="PaymentMode">
-        <option value="Select" default>Select</option>
-        <option value="Cash">Cash</option>
-        <option value="GPay">GPay</option>
-        <option value="PhonePay">PhonePay</option>
-        <option value="BankTransfer">Bank Transfer</option>
-      </select><br />
-      
-      <label for="ReferenceNumber">Reference Number:</label><br />
-      <input type="text" id="ReferenceNumber" placeholder="Reference Number"><br />
-      
-      <label for="Amount">Amount:</label><br />
-      <input type="number" id="Amount" placeholder="Amount"><br />
-      
-      <label for="Comments">Comments:</label><br />
-      <input type="text" id="Comments" placeholder="Enter the comments"><br /><br />
-      
-      <button id="saveData" class="Button">Save</button>
+      <div class="input-row">
+        <input type="number" id="Amount" placeholder="Amount">
+        <input type="text" id="Comments" placeholder="Enter the comments">
+      </div>
+
+      <div class="input-row">
+        <button id="saveData" class="Button">Save</button>
+      </div>
     </form>
   </main>
 

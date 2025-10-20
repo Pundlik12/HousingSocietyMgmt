@@ -1,37 +1,63 @@
 import { auth, db } from './firebase.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { addDoc, query, getDocs, orderBy, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 onAuthStateChanged(auth, user => 
 {
   if (!user) return window.location.href = "index.html";
 
-  // async function loadData() 
+  document.getElementById("RoomNo").addEventListener("input", () => 
+  {
+    const RoomNo = document.getElementById("RoomNo").value.trim();
+    const ownersData = 
+    {
+        "101": "Alice Sharma",
+        "102": "Bob Mehta",
+        "103": "Charlie Desai",
+        "104": "Diana Kapoor"
+    };
+
+    const name = ownersData[RoomNo] || "";
+    document.getElementById("OwnerName").value = name;
+  });
+
+  // async function lookupOwner() 
   // {
-  //     alert('On load function..');
-  //     const q = query(collection(db, "Income"), orderBy("date", "desc"));
-  //     const snapshot = await getDocs(q);
-      
-  //     const tbody = document.querySelector("#dataTable tbody");
-  //     tbody.innerHTML = "";
-      
-  //     snapshot.forEach(doc => {
-  //       const { RoomNo, TrnDate, PaymentMode, ReferenceNumber, Amount, Comments } = doc.data();
-  //       //const row = `<tr><td>${name}</td><td>₹${amount}</td><td>${date}</td></tr>`;
-  //       const row = `<tr>
-  //         <th>${RoomNo}</th>
-  //         <th>${TrnDate}</th>
-  //         <th>${PaymentMode}</th>
-  //         <th>${ReferenceNumber}</th>
-  //         <th>${Amount}</th>
-  //         <th>${Comments}</th>
-  //       </tr>`
-  //       tbody.innerHTML += row;
-  //     });
+  //   const RoomNo = document.getElementById("RoomNo").value.trim();
+  //   const OwnerName = document.getElementById("OwnerName");
+
+  //   if (!RoomNo) 
+  //   {
+  //     OwnerName.value = "";
+  //     document.getElementById("RoomNo").focus();
+  //     return;
+  //   }
+
+  //   try 
+  //   {
+  //     const docRef = doc(db, "Owners", RoomNo);
+  //     const docSnap = await getDoc(docRef);
+
+  //     if (docSnap.exists()) 
+  //     {
+  //       const data = docSnap.data();
+  //       OwnerName.value = data.name;
+  //     } 
+  //     else 
+  //     {
+  //       OwnerName.value = "";
+  //     }
+  //   }
+  //   catch (error) 
+  //   {
+  //     console.error("Error fetching owner name:", error);
+  //     alert("Error fetching owner name:", error.message);
+  //   }
   // }
 
-  document.getElementById("saveData").onclick = async () => 
+  document.getElementById("saveData").onclick = async (e) => 
   {
+    e.preventDefault();
     const RoomNo  = document.getElementById("RoomNo").value;
     const TrnDate = document.getElementById("TrnDate").value;
     const PaymentMode  = document.getElementById("PaymentMode").value;
@@ -39,46 +65,67 @@ onAuthStateChanged(auth, user =>
     const Amount = document.getElementById("Amount").value;
     const Comments = document.getElementById("Comments").value;
 
+    // alert(`RoomNo: ${RoomNo}
+    //       TrnDate: ${TrnDate}
+    //       PaymentMode: ${PaymentMode}
+    //       ReferenceNumber: ${ReferenceNumber}
+    //       Amount: ${Amount}
+    //       Comments: ${Comments}`);
+
     if(RoomNo == "")
     {
-      alert("Enter Room No.")
+      alert("Enter Room No.");
+      document.getElementById("RoomNo").focus();
     }
     else if(TrnDate == "")
     {
-      alert("Select Trn Date.")
+      alert("Select Trn Date.");
+      document.getElementById("TrnDate").focus();
     }
     else if(PaymentMode == "")
     {
-      alert("Select Payment Mode.")
+      alert("Select Payment Mode.");
+      document.getElementById("PaymentMode").focus();
     }
     else if(ReferenceNumber == "")
     {
-      alert("Enter Reference Number.")
+      alert("Enter Reference Number.");
+      document.getElementById("ReferenceNumber").focus();
     }
     else if(Amount == "")
     {
-      alert("Enter Amount.")
+      alert("Enter Amount.");
+      document.getElementById("Amount").focus();
     }
     else if(Comments == "")
     {
-      alert("Enter Comments.")
+      alert("Enter Comments.");
+      document.getElementById("Comments").focus();
     }
     else
     {
-      await addDoc(collection(db, "users", user.uid, "Income"), {
-        RoomNo,
-        TrnDate,
-        PaymentMode,
-        ReferenceNumber,
-        Amount,
-        Comments,
-        CreatedDate: new Date()
-      });
-      
-      const form  = document.getElementById("IncomeForm");
-      form.reset();
+      try 
+      {
+        await addDoc(collection(db, "Income"), {
+          RoomNo: RoomNo,
+          TrnDate: TrnDate,
+          PaymentMode: PaymentMode,
+          ReferenceNumber: ReferenceNumber,
+          Amount: Amount,
+          Comments: Comments,
+          CreatedDate: new Date()
+        });
+        
+        const form  = document.getElementById("IncomeForm");
+        form.reset();
 
-      alert("Income saved!");
+        alert("Income entry added successfully.");
+      }
+      catch (error) 
+      {
+        alert("Error adding income entry:", error.message);
+        console.error("Error adding income entry:", error.message);
+      }
     }
   };
 });

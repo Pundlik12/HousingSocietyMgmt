@@ -1,40 +1,14 @@
 import { auth, db } from './firebase.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { addDoc, query, getDocs, orderBy, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 onAuthStateChanged(auth, user => 
 {
   if (!user) return window.location.href = "index.html";
   
-  // async function loadData() 
-  // {
-  //     alert('On load function..');
-  //     const q = query(collection(db, "Owner"), orderBy("date", "desc"));
-  //     const snapshot = await getDocs(q);
-      
-  //     const tbody = document.querySelector("#dataTable tbody");
-  //     tbody.innerHTML = "";
-      
-  //     snapshot.forEach(doc => {
-  //       const { OwnerName, WingName, FloorNumber, RoomNo, Area, MaintenanceAmount, MobileNumber, EmailID } = doc.data();
-  //       //const row = `<tr><td>${name}</td><td>₹${amount}</td><td>${date}</td></tr>`;
-  //       const row = `<tr>
-  //         <th>${OwnerName}</th>
-  //         <th>${WingName}</th>
-  //         <th>${FloorNumber}</th>
-  //         <th>${RoomNo}</th>
-  //         <th>${Area}</th>
-  //         <th>${MaintenanceAmount}</th>
-  //         <th>${MobileNumber}</th>
-  //         <th>${EmailID}</th>
-  //       </tr>`
-  //       tbody.innerHTML += row;
-  //     });
-  // }
-
-  document.getElementById("saveData").onclick = async () => 
+  document.getElementById("saveData").onclick = async (e) => 
   {
-    alert('In SaveData function of Owner.'); 
+    e.preventDefault();
     const OwnerName  = document.getElementById("OwnerName").value;
     const WingName = document.getElementById("WingName").value;
     const FloorNumber  = document.getElementById("FloorNumber").value;
@@ -74,22 +48,30 @@ onAuthStateChanged(auth, user =>
     }
     else
     {      
-      await addDoc(collection(db, "users", user.uid, "Owner"), {
-        OwnerName, 
-        WingName, 
-        FloorNumber, 
-        RoomNo, 
-        Area, 
-        MaintenanceAmount, 
-        MobileNumber, 
-        EmailID,
-        CreatedDate: new Date()
-      });
-      
-      const form  = document.getElementById("OwnerForm");
-      form.reset();
-      
-      alert("Owner saved!");
+      try
+      {
+        await addDoc(collection(db, "Owner"), {
+            OwnerName,
+            WingName,
+            FloorNumber,
+            RoomNo, 
+            Area, 
+            MaintenanceAmount, 
+            MobileNumber, 
+            EmailID,
+            CreatedDate: new Date()
+        });
+
+        const form  = document.getElementById("OwnerForm");
+        form.reset();
+
+        alert("Owner added successfully.");
+      }
+      catch(error)
+      {
+        alert("Error adding owner entry:", error.message);
+        console.error("Error adding owner entry:", error.message);
+      }
     }
   };
 });

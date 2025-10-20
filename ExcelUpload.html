@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Excel Upload to Firebase</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f4f4f4;
+    }
+    form {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    label, input, button {
+      display: block;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+ 
+  <h2 style="text-align:center;">🌿 Excel Upload – Firebase Firestore</h2>
+  <form id="excelForm">
+    <label for="excelFile">Select Excel File:</label>
+    <input type="file" id="excelFile" accept=".xlsx, .xls" required>
+    <button type="submit">Upload</button>
+  </form>
+ 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"></script>
+ 
+  <!-- SheetJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+ 
+  <script>
+    // 🔥 Firebase Config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+ 
+    // 🔌 Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+ 
+    // 📤 Handle Excel Upload
+    document.getElementById('excelForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const file = document.getElementById('excelFile').files[0];
+      const reader = new FileReader();
+ 
+      reader.onload = function(e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(sheet);
+ 
+        // 🗃️ Upload each row to Firestore
+        jsonData.forEach((row, index) => {
+          db.collection("excelData").add(row)
+            .then(() => console.log(`✅ Row ${index + 1} uploaded`))
+            .catch(err => console.error(`❌ Error on row ${index + 1}:`, err));
+        });
+ 
+        alert("✅ Upload complete!");
+      };
+ 
+      reader.readAsArrayBuffer(file);
+    });
+  </script>
+ 
+</body>
+</html>

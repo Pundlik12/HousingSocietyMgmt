@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>owners</title>
+  <title>HSMS</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <header>
     <button id="toggleSidebar"><i class="fas fa-bars"></i></button>
-    <h1>Housing Society Management System</h1>
+    <h1 class="responsive-text">Housing Society Management System</h1>
     <div class="header-actions">
       <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
       <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -20,44 +20,48 @@
   <nav class="sidebar">
     <ul>
       <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
+      
+      <li><a href="income.html"><i class="fa-solid fa-pen-fancy"></i> Incomes</a></li>
+      <li><a href="incomeHistory.html"><i class="fa-solid fa-clock-rotate-left"></i> Income History</a></li>
 
-      <li><a href="income.html"><i class="fa-solid fa-pen-fancy"></i></i> Incomes</a></li>
-      <li><a href="expense.html"><i class="fa-solid fa-notes-medical"></i></i> Expenses</a></li>
-      <li><a href="owners.html"><i class="fa-solid fa-child"></i></i> Owners</a></li>
+      <li><a href="expense.html"><i class="fa-solid fa-notes-medical"></i> Expenses</a></li>
+      <li><a href="expenseHistory.html"><i class="fa-solid fa-clock-rotate-left"></i> Expenses History</a></li>
 
-      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
-      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="owners.html"><i class="fa-solid fa-child"></i> Owners</a></li>
+
+      <!-- <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li> -->
     </ul>
   </nav>
 
   <main>
-    <h2>Owner Details</h2>
+    <h2>Create Owners</h2>
+    <a href="owners.html"><i class="fa fa-address-book"></i></i> Owners</a>
+    
     <form id="OwnerForm">
-      <label for="OwnerName">Owner Name:</label><br />
-      <input type="text" id="OwnerName" name="OwnerName" placeholder="Enter Owner Name" /><br />
+      <div class="input-row">
+        <input type="text" id="OwnerName" name="OwnerName" placeholder="Enter Owner Name" />
+        <input type="text" id="WingName" name="WingName" placeholder="Enter Wing Name" />
+      </div>
       
-      <label for="WingName">Wing Name:</label><br />
-      <input type="text" id="WingName" name="WingName" placeholder="Enter Wing Name" /><br />
-      
-      <label for="FloorNumber">Floor Number:</label><br />
-      <input type="text" id="FloorNumber" name="FloorNumber" placeholder="Enter Floor Number" /><br />
+      <div class="input-row">
+        <input type="text" id="FloorNumber" name="FloorNumber" placeholder="Enter Floor Number" />
+        <input type="text" id="RoomNo" name="RoomNo" placeholder="Enter Room No" />
+      </div>
 
-      <label for="RoomNo">Room No:</label><br />
-      <input type="text" id="RoomNo" name="RoomNo" placeholder="Enter Room No" /><br />
+      <div class="input-row">
+        <input type="number" id="Area" name="Area" placeholder="Enter Area in Sq Ft">
+        <input type="number" id="MaintenanceAmount" name="MaintenanceAmount" placeholder="Enter Maintenance Amount">
+      </div>
+      
+      <div class="input-row">
+        <input type="text" id="MobileNumber" name="MobileNumber" placeholder="Enter Mobile Number">
+        <input type="email" id="EmailID" name="EmailID" placeholder="Enter Email ID">
+      </div>
 
-      <label for="Area">Area in Sq Ft:</label><br />
-      <input type="number" id="Area" name="Area" placeholder="Enter Area in Sq Ft"><br />
-      
-      <label for="MaintenanceAmount">Maintenance Amount:</label><br />
-      <input type="number" id="MaintenanceAmount" name="MaintenanceAmount" placeholder="Enter Maintenance Amount"><br />
-      
-      <label for="MobileNumber">Mobile Number:</label><br />
-      <input type="text" id="MobileNumber" name="MobileNumber" placeholder="Enter Mobile Number"><br />
-      
-      <label for="EmailID">Email ID:</label><br />
-      <input type="email" id="EmailID" name="EmailID" placeholder="Enter Email ID"><br /><br />
-      
-      <button id="saveData" class="Button">Save</button>
+      <div class="input-row">
+        <button id="saveData" class="Button">Save</button>
+      </div>
     </form>
   </main>
 

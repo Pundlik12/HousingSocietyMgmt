@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+  <title>HSMS</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
@@ -89,12 +89,13 @@
     .login-container .forgot-link {
       text-align: right;
       margin-top: 5px;
+      text-align: center;
     }
 
     .login-container .forgot-link a {
       color: var(--primary-color);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.9rem; 
     }
 
     .login-container .forgot-link a:hover {
@@ -114,7 +115,7 @@
     
     <div class="options">
       <label><input type="checkbox" id="rememberMe" /> Remember Me</label>
-      <label><input type="checkbox" onclick="togglePassword()" /> Show Password</label>
+      <label><input type="checkbox" id="showPasswordbtn" /> Show Password</label>
     </div>
 
     <!-- <button onclick="login()"><i class="fas fa-sign-in-alt"></i> Login</button> -->

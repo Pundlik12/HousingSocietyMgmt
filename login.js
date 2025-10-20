@@ -22,12 +22,19 @@ window.onload = function ()
   }
 };
 
-function togglePassword() 
+document.getElementById("showPasswordbtn").onclick = async () => 
 {
   const passwordInput = document.getElementById("password");
-  passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+  if (passwordInput.type === "password") 
+  {
+    passwordInput.type = "text";
+  } 
+  else 
+  {
+    passwordInput.type = "password";
+  }
 }
-	
+
 document.getElementById("loginBtn").onclick = async () => 
 {
   try 
