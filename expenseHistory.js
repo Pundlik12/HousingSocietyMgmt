@@ -51,13 +51,12 @@ onAuthStateChanged(auth, user =>
 
           const form  = document.getElementById("ExpenseHistoryForm");
           form.reset();
-
-          alert("Expense history loaded successfully.");
+          //alert("Expense history loaded successfully.");
       }
     }
     catch(error)
     {
-      console.error("Error loading expense history:", error.message);
+      //console.error("Error loading expense history:", error.message);
       alert("Error loading expense history:", error.message);
     }
   }

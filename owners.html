@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HSMS</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -22,12 +27,12 @@
       <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
       
       <li><a href="income.html"><i class="fa-solid fa-pen-fancy"></i> Incomes</a></li>
-      <li><a href="incomeHistory.html"><i class="fa-solid fa-clock-rotate-left"></i> Income History</a></li>
-
+      
       <li><a href="expense.html"><i class="fa-solid fa-notes-medical"></i> Expenses</a></li>
-      <li><a href="expenseHistory.html"><i class="fa-solid fa-clock-rotate-left"></i> Expenses History</a></li>
-
+      
       <li><a href="owners.html"><i class="fa-solid fa-child"></i> Owners</a></li>
+
+      <li><a href="Committe.html"><i class="fa-solid fa-child"></i> Committe</a></li>
 
       <!-- <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
       <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li> -->
@@ -35,34 +40,35 @@
   </nav>
 
   <main>
-    <h2>Create Owners</h2>
-    <a href="owners.html"><i class="fa fa-address-book"></i></i> Owners</a>
+    <div class="mainheader">
+      <h2>Create Owners</h2>
+    </div>
     
-    <form id="OwnerForm">
-      <div class="input-row">
-        <input type="text" id="OwnerName" name="OwnerName" placeholder="Enter Owner Name" />
-        <input type="text" id="WingName" name="WingName" placeholder="Enter Wing Name" />
-      </div>
-      
-      <div class="input-row">
-        <input type="text" id="FloorNumber" name="FloorNumber" placeholder="Enter Floor Number" />
-        <input type="text" id="RoomNo" name="RoomNo" placeholder="Enter Room No" />
-      </div>
+    <div class="input-row">
+      <input type="text" id="OwnerName" name="OwnerName" placeholder="Enter Owner Name" />
+      <input type="text" id="WingName" name="WingName" placeholder="Enter Wing Name eg. Wing-A, Wing-B, Wing-C" />
+    </div>
+    
+    <div class="input-row">
+      <input type="text" id="FloorNumber" name="FloorNumber" placeholder="Enter Floor Number eg. First, Second, Third" />
+      <input type="text" id="RoomNo" name="RoomNo" placeholder="Enter Room No eg. 001, 100, 200" />
+    </div>
 
-      <div class="input-row">
-        <input type="number" id="Area" name="Area" placeholder="Enter Area in Sq Ft">
-        <input type="number" id="MaintenanceAmount" name="MaintenanceAmount" placeholder="Enter Maintenance Amount">
-      </div>
-      
-      <div class="input-row">
-        <input type="text" id="MobileNumber" name="MobileNumber" placeholder="Enter Mobile Number">
-        <input type="email" id="EmailID" name="EmailID" placeholder="Enter Email ID">
-      </div>
+    <div class="input-row">
+      <input type="number" id="Area" name="Area" placeholder="Enter Area in Sq Ft">
+      <input type="number" id="MaintenanceAmount" name="MaintenanceAmount" placeholder="Enter Maintenance Amount">
+    </div>
+    
+    <div class="input-row">
+      <input type="text" id="MobileNumber" name="MobileNumber" placeholder="Enter Mobile Number">
+      <input type="email" id="EmailID" name="EmailID" placeholder="Enter Email ID">
+    </div>
 
-      <div class="input-row">
-        <button id="saveData" class="Button">Save</button>
-      </div>
-    </form>
+    <div class="input-row">
+      <button type="submit" id="saveData" class="Button" onclick="createOwner()">Submit</button>
+    </div>
+    
+    <table id="ownerTable"></table>
   </main>
 
   <footer>

@@ -15,11 +15,11 @@ onAuthStateChanged(auth, user =>
     const Amount  = document.getElementById("Amount").value;
     const Comments = document.getElementById("Comments").value;
     
-    alert(`TrnDate: ${TrnDate}
-      PaymentMode: ${PaymentMode}
-      ReferenceNumber: ${ReferenceNumber}
-      Amount: ${Amount}
-      Comments: ${Comments}`);
+    // alert(`TrnDate: ${TrnDate}
+    //   PaymentMode: ${PaymentMode}
+    //   ReferenceNumber: ${ReferenceNumber}
+    //   Amount: ${Amount}
+    //   Comments: ${Comments}`);
 
     if(TrnDate == "")
     {
@@ -62,7 +62,7 @@ onAuthStateChanged(auth, user =>
       catch(error)
       {
         alert("Error adding expense entry:", error.message);
-        console.error("Error adding expense entry:", error.message);
+        //console.error("Error adding expense entry:", error.message);
       }
     }
   };

@@ -22,13 +22,13 @@
       <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
       
       <li><a href="income.html"><i class="fa-solid fa-pen-fancy"></i> Incomes</a></li>
-      <li><a href="incomeHistory.html"><i class="fa-solid fa-clock-rotate-left"></i> Income History</a></li>
-
+      
       <li><a href="expense.html"><i class="fa-solid fa-notes-medical"></i> Expenses</a></li>
-      <li><a href="expenseHistory.html"><i class="fa-solid fa-clock-rotate-left"></i> Expenses History</a></li>
-
+      
       <li><a href="owners.html"><i class="fa-solid fa-child"></i> Owners</a></li>
 
+      <li><a href="Committe.html"><i class="fa-solid fa-child"></i> Committe</a></li>
+      
       <!-- <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
       <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li> -->
     </ul>
@@ -39,45 +39,22 @@
     <div class="card-container">
       <div class="card">
         <h3>Total Incomes</h3>
-        <p>This is the first card. You can use it to highlight key information, stats, or features.</p>
+        <p id="TotalIncome">0</p>
       </div>
       <div class="card">
         <h3>Total Expenses</h3>
-        <p>This is the second card. It’s perfect for announcements, updates, or quick links.</p>
+        <p id="TotalExpense">0</p>
       </div>
     </div>
-
+    
     <br>
-    <div class="input-row">
-      <label for="Chairperson">Chairperson</label>
-      <input type="text" id="Chairperson" placeholder="Chairperson">
-
-      <label for="SubChairperson">Sub-Chairperson</label>
-      <input type="text" id="SubChairperson" placeholder="Sub-Chairperson">
-    </div>
-
-    <div class="input-row">
-      <label for="Secretary">Secretary</label>
-      <input type="text" id="Secretary" placeholder="Secretary">
-
-      <label for="SubSecretary">Sub-Secretary</label>
-      <input type="text" id="SubSecretary" placeholder="Sub-Secretary">
-    </div>
-
-    <div class="input-row">
-      <label for="Treasurer">Treasurer</label>
-      <input type="text" id="Treasurer" placeholder="Treasurer">
-
-      <label for="SubTreasurer">Sub-Treasurer</label>
-      <input type="text" id="SubTreasurer" placeholder="Sub-Treasurer">
-    </div>
-
+    <table id="dataTable" class="CommitteTable"></table>
   </main>
 
   <footer>
     <p>&copy; 2025 Pandurang Apartment CHS Sonarpada</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="dashboard.js" type="module"></script>
 </body>
 </html>

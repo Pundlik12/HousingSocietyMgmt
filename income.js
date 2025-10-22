@@ -1,6 +1,6 @@
 import { auth, db } from './firebase.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { collection, query, where, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 onAuthStateChanged(auth, user => 
 {
@@ -8,57 +8,53 @@ onAuthStateChanged(auth, user =>
 
   document.getElementById("RoomNo").addEventListener("input", () => 
   {
-    const RoomNo = document.getElementById("RoomNo").value.trim();
-    const ownersData = 
-    {
-        "101": "Alice Sharma",
-        "102": "Bob Mehta",
-        "103": "Charlie Desai",
-        "104": "Diana Kapoor"
-    };
-
-    const name = ownersData[RoomNo] || "";
-    document.getElementById("OwnerName").value = name;
+    lookupOwner();
   });
 
-  // async function lookupOwner() 
-  // {
-  //   const RoomNo = document.getElementById("RoomNo").value.trim();
-  //   const OwnerName = document.getElementById("OwnerName");
+  async function lookupOwner() 
+  {
+    const RoomNo = document.getElementById("RoomNo").value.trim();
+    const OwnerName = document.getElementById("OwnerName");
 
-  //   if (!RoomNo) 
-  //   {
-  //     OwnerName.value = "";
-  //     document.getElementById("RoomNo").focus();
-  //     return;
-  //   }
+    if (!RoomNo) 
+    {
+      OwnerName.value = "";
+      document.getElementById("RoomNo").focus();
+      return;
+    }
 
-  //   try 
-  //   {
-  //     const docRef = doc(db, "Owners", RoomNo);
-  //     const docSnap = await getDoc(docRef);
+    try 
+    {
+      const q = query(collection(db, "Owner"), where("RoomNo", "==", RoomNo));
+      const snapshot = await getDocs(q);
 
-  //     if (docSnap.exists()) 
-  //     {
-  //       const data = docSnap.data();
-  //       OwnerName.value = data.name;
-  //     } 
-  //     else 
-  //     {
-  //       OwnerName.value = "";
-  //     }
-  //   }
-  //   catch (error) 
-  //   {
-  //     console.error("Error fetching owner name:", error);
-  //     alert("Error fetching owner name:", error.message);
-  //   }
-  // }
+      if (!snapshot.empty) 
+      {
+        const data = snapshot.docs[0].data();
+        //alert("Owner Name: " + data.OwnerName);
+        document.getElementById("OwnerName").value = data.OwnerName;
+        document.getElementById("MaintenanceAmount").value = data.MaintenanceAmount;
+        document.getElementById("TrnDate").focus();
+      } 
+      else 
+      {
+        //alert("Not found");
+        document.getElementById("OwnerName").value = "";
+        document.getElementById("MaintenanceAmount").value = "";
+      }
+    }
+    catch (error) 
+    {
+      //console.error("Error fetching owner name:", error);
+      alert("Error fetching owner name:", error.message);
+    }
+  }
 
   document.getElementById("saveData").onclick = async (e) => 
   {
     e.preventDefault();
     const RoomNo  = document.getElementById("RoomNo").value;
+    const OwnerName  = document.getElementById("OwnerName").value;
     const TrnDate = document.getElementById("TrnDate").value;
     const PaymentMode  = document.getElementById("PaymentMode").value;
     const ReferenceNumber  = document.getElementById("ReferenceNumber").value;
@@ -75,6 +71,11 @@ onAuthStateChanged(auth, user =>
     if(RoomNo == "")
     {
       alert("Enter Room No.");
+      document.getElementById("RoomNo").focus();
+    }
+    else if(OwnerName == "")
+    {
+      alert("Incorrect Room No.");
       document.getElementById("RoomNo").focus();
     }
     else if(TrnDate == "")
@@ -124,7 +125,7 @@ onAuthStateChanged(auth, user =>
       catch (error) 
       {
         alert("Error adding income entry:", error.message);
-        console.error("Error adding income entry:", error.message);
+        //console.error("Error adding income entry:", error.message);
       }
     }
   };

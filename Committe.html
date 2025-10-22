@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HSMS</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -28,7 +33,7 @@
       <li><a href="owners.html"><i class="fa-solid fa-child"></i> Owners</a></li>
 
       <li><a href="Committe.html"><i class="fa-solid fa-child"></i> Committe</a></li>
-      
+
       <!-- <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
       <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li> -->
     </ul>
@@ -36,48 +41,37 @@
 
   <main>
     <div class="mainheader">
-      <h2>Create Incomes</h2>
-      <a href="incomeHistory.html"><i class="fa fa-address-book"></i></i> Income List</a>
+      <h2>Create Committe</h2>
+    </div>
+    
+    <div class="input-row">
+      <label for="CommitteMemberName">Committe Member Name:-</label>
+      <input type="text" id="CommitteMemberName" name="CommitteMemberName" placeholder="Enter Committe Member Name" />
     </div>
 
-    <form id="IncomeForm">
-      <div class="input-row">
-        <input type="text" id="RoomNo" placeholder="Enter Room No""/>
-        <input type="text" id="OwnerName" readonly=true placeholder="Enter Owner Name" />
-      </div>
-
-      <div class="input-row">
-        <input type="number" id="MaintenanceAmount" readonly=true placeholder="Enter Maintenance Amount">
-        <input type="date" id="TrnDate" placeholder="Enter Transaction Date">
-      </div>
-      
-      <div class="input-row">
-        <select id="PaymentMode">
+    <div class="input-row">
+      <label for="Position">Select Position:-</label>
+      <select id="Position">
           <option value="Select" default>Select</option>
-          <option value="Cash">Cash</option>
-          <option value="GPay">GPay</option>
-          <option value="PhonePay">PhonePay</option>
-          <option value="BankTransfer">Bank Transfer</option>
+          <option value="ChairPerson">Chair Person</option>
+          <option value="DeputyChairPerson">Deputy ChairPerson</option>
+          <option value="Secretory">Secretory</option>
+          <option value="DeputySecretory">Deputy Secretory</option>
+          <option value="Treasurer">Treasurer</option>
         </select>
-        <input type="text" id="ReferenceNumber" placeholder="Reference Number">
-      </div>
-      
-      <div class="input-row">
-        <input type="number" id="Amount" placeholder="Amount">
-        <input type="text" id="Comments" placeholder="Enter the comments">
-      </div>
+    </div>
 
-      <div class="input-row">
-        <button id="saveData" class="Button">Save</button>
-      </div>
-    </form>
+    <div class="input-row">
+      <button type="submit" id="saveData" class="Button" onclick="createCommitte()">Submit</button>
+    </div>
+    <table id="CommitteTable"></table>    
   </main>
 
   <footer>
     <p>&copy; 2025 Pandurang Apartment CHS Sonarpada</p>
   </footer>
 
-  <script src="income.js" type="module"></script>
+  <script src="Committe.js" type="module"></script>
   <script src="script.js"></script>
 </body>
 </html>
