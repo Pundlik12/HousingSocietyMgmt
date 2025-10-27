@@ -1,6 +1,6 @@
 import { auth, db } from './firebase.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { addDoc, collection, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 onAuthStateChanged(auth, user => 
 {
@@ -45,8 +45,11 @@ onAuthStateChanged(auth, user =>
     {
       try
       {
+        const jsTrnDate = new Date(TrnDate);
+        const timeStampTrnDate = Timestamp.fromDate(jsTrnDate);
+
         await addDoc(collection(db, "Expense"), {
-                  TrnDate: TrnDate,
+                  TrnDate: timeStampTrnDate,
                   PaymentMode: PaymentMode,
                   ReferenceNumber: ReferenceNumber,
                   Amount: Amount,
@@ -54,8 +57,11 @@ onAuthStateChanged(auth, user =>
                   CreatedDate: new Date()
                 });
 
-        const form  = document.getElementById("ExpenseForm");
-        form.reset();
+        document.getElementById("TrnDate").value = "";
+        document.getElementById("PaymentMode").value = "";
+        document.getElementById("ReferenceNumber").value = "";
+        document.getElementById("Amount").value = "";
+        document.getElementById("Comments").value = "";
 
         alert("Expense entry added successfully.");
       }

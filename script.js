@@ -36,11 +36,9 @@ window.addEventListener('DOMContentLoaded', () =>
   if (userToken) 
   {
     console.log('User is already logged in:', userToken);
-    // window.location.href = '/dashboard.html';
   }
   else
   {
-    console.log('No user token found. Show login form.');
     window.location.href = "index.html";
   }
 });

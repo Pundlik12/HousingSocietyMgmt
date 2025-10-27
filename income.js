@@ -1,6 +1,6 @@
 import { auth, db } from './firebase.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { collection, query, where, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { collection, query, where, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 onAuthStateChanged(auth, user => 
 {
@@ -107,9 +107,12 @@ onAuthStateChanged(auth, user =>
     {
       try 
       {
+        const jsTrnDate = new Date(TrnDate);
+        const timeStampTrnDate = Timestamp.fromDate(jsTrnDate);
+
         await addDoc(collection(db, "Income"), {
           RoomNo: RoomNo,
-          TrnDate: TrnDate,
+          TrnDate: timeStampTrnDate,
           PaymentMode: PaymentMode,
           ReferenceNumber: ReferenceNumber,
           Amount: Amount,
@@ -117,8 +120,12 @@ onAuthStateChanged(auth, user =>
           CreatedDate: new Date()
         });
         
-        const form  = document.getElementById("IncomeForm");
-        form.reset();
+        document.getElementById("RoomNo").value = "";
+        document.getElementById("TrnDate").value = "";
+        document.getElementById("PaymentMode").value = "";
+        document.getElementById("ReferenceNumber").value = "";
+        document.getElementById("Amount").value = "";
+        document.getElementById("Comments").value = "";
 
         alert("Income entry added successfully.");
       }

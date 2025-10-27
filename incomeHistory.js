@@ -29,13 +29,32 @@ onAuthStateChanged(auth, user =>
       }
       else
       {
-        const q = query(collection(db, "Income"), orderBy("TrnDate", "desc"));
-        const snapshot = await getDocs(q);
+        let q;
+    		q = query(collection(db, 'Income'),
+          where("RoomNo","==", RoomNo),
+          where("TrnDate",">=", ToDate)
+        );
+		
+        const qs = await getDocs(q);
+        const snapshot = qs.cos.map(doc=>({id:doc.id, ...doc.data()}));
         
+        // let myquery;
+        // myquery = query(collection(db, 'Income'));
+          
+        // const snapshot1 = await getDocs(myquery);
+        // const snapshot = snapshot1.docs.filter(doc => {
+        //   const data = doc.data();
+        //   return (
+        //     data.RoomNo?.toLowerCase().includes(RoomNo) &&
+        //     data.TrnDate?.toLowerCase().includes(fromDate)
+        //   );
+        // });
+		  
         const tbody = document.querySelector("#dataTable tbody");
         tbody.innerHTML = "";
         
-        snapshot.forEach(doc => {
+        snapshot.forEach(doc => 
+		    {
             const { RoomNo, TrnDate, PaymentMode, ReferenceNumber, Amount, Comments, CreatedDate } = doc.data();
             
             const row = `<tr>
@@ -48,16 +67,15 @@ onAuthStateChanged(auth, user =>
               <th>${CreatedDate}</th>
             </tr>`
             tbody.innerHTML += row;
-          });
+        });
 
-          const form  = document.getElementById("IncomeHistoryForm");
-          form.reset();
-          // alert("Income history loaded successfully.");
-        }
+        document.getElementById("RoomNo").value = "";
+        document.getElementById("fromDate").value = "";
+      }
     }
     catch(error)
     {
-      console.error("Error loading income history:", error.message);
+      //console.error("Error loading income history:", error.message);
       alert("Error loading income history:", error.message);
     }
   }

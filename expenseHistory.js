@@ -29,9 +29,27 @@ onAuthStateChanged(auth, user =>
       }
       else
       {
-        const q = query(collection(db, "Expense"), orderBy("TrnDate", "desc"));
-        const snapshot = await getDocs(q);
-        
+        let q;
+        q = query(collection(db, 'Expense'),
+            where("TrnDate",">=",FromDate),
+            where("TrnDate","<=",ToDate)
+          );
+          
+        const qs = await getDocs(q);
+        const snapshot = qs.cos.map(doc=>({id:doc.id, ...doc.data()}));
+          
+        // let myquery;
+        // myquery = query(collection(db, 'Expense'));
+          
+        // const snapshot1 = await getDocs(myquery);
+        // const snapshot = snapshot1.docs.filter(doc => {
+        //   const data = doc.data();
+        //   return (
+        //     data.TrnDate?.toLowerCase().includes(FromDate) &&
+        //     data.TrnDate?.toLowerCase().includes(ToDate)
+        //   );
+        //   });
+		  
         const tbody = document.querySelector("#dataTable tbody");
         tbody.innerHTML = "";
         
@@ -49,8 +67,9 @@ onAuthStateChanged(auth, user =>
             tbody.innerHTML += row;
           });
 
-          const form  = document.getElementById("ExpenseHistoryForm");
-          form.reset();
+          document.getElementById("FromDate").value = "";
+          document.getElementById("ToDate").value = "";
+          
           //alert("Expense history loaded successfully.");
       }
     }

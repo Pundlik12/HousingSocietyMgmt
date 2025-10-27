@@ -40,37 +40,35 @@
       <a href="incomeHistory.html"><i class="fa fa-address-book"></i></i> Income List</a>
     </div>
 
-    <form id="IncomeForm">
-      <div class="input-row">
-        <input type="text" id="RoomNo" placeholder="Enter Room No""/>
-        <input type="text" id="OwnerName" readonly=true placeholder="Enter Owner Name" />
-      </div>
+    <div class="input-row">
+      <input type="text" id="RoomNo" placeholder="Enter Room No""/>
+      <input type="text" id="OwnerName" readonly=true placeholder="Enter Owner Name" />
+    </div>
 
-      <div class="input-row">
-        <input type="number" id="MaintenanceAmount" readonly=true placeholder="Enter Maintenance Amount">
-        <input type="date" id="TrnDate" placeholder="Enter Transaction Date">
-      </div>
-      
-      <div class="input-row">
-        <select id="PaymentMode">
-          <option value="Select" default>Select</option>
-          <option value="Cash">Cash</option>
-          <option value="GPay">GPay</option>
-          <option value="PhonePay">PhonePay</option>
-          <option value="BankTransfer">Bank Transfer</option>
-        </select>
-        <input type="text" id="ReferenceNumber" placeholder="Reference Number">
-      </div>
-      
-      <div class="input-row">
-        <input type="number" id="Amount" placeholder="Amount">
-        <input type="text" id="Comments" placeholder="Enter the comments">
-      </div>
+    <div class="input-row">
+      <input type="number" id="MaintenanceAmount" readonly=true placeholder="Enter Maintenance Amount">
+      <input type="date" id="TrnDate" placeholder="Enter Transaction Date">
+    </div>
+    
+    <div class="input-row">
+      <select id="PaymentMode">
+        <option value="Select" default>Select</option>
+        <option value="Cash">Cash</option>
+        <option value="GPay">GPay</option>
+        <option value="PhonePay">PhonePay</option>
+        <option value="BankTransfer">Bank Transfer</option>
+      </select>
+      <input type="text" id="ReferenceNumber" placeholder="Reference Number">
+    </div>
+    
+    <div class="input-row">
+      <input type="number" id="Amount" placeholder="Amount">
+      <input type="text" id="Comments" placeholder="Enter the comments">
+    </div>
 
-      <div class="input-row">
-        <button id="saveData" class="Button">Save</button>
-      </div>
-    </form>
+    <div class="input-row">
+      <button id="saveData" class="Button">Save</button>
+    </div>
   </main>
 
   <footer>
