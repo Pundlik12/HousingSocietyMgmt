@@ -1,8 +1,10 @@
 import { auth, db } from './firebase.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { collection, getDocs, query, sum, getAggregateFromServer } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const CommitteRef = collection(db, "Committe");
+const IncomeRef = collection(db, "Income");
+const ExpenseRef = collection(db, "Expense");
 
 onAuthStateChanged(auth, user => 
 {
@@ -31,46 +33,40 @@ window.readCommittes = async function ()
     table.appendChild(row);
   });
 
-  document.getElementById("TotalIncome").textContent  = getTotalIncome() + "";
-  document.getElementById("TotalExpense").textContent  = getTotalExpenses() + "";
+  getTotalIncome();
+  getTotalExpenses();
 };
 
 async function getTotalIncome() 
 {
-  const querySnapshot = await getDocs(collection(db, "Income"));
-  let total = 0;
-
-  querySnapshot.forEach(doc => 
+  try 
   {
-    const data = doc.data();
-    const amount = parseFloat(data.Amount);
-    
-    if (!isNaN(amount)) 
-    {
-      total += amount;
-    }
-  });
-
-  document.getElementById("TotalIncome").textContent  = `₹${total.toFixed(2)}`;
-  //console.log("Total Income:", total);
+    const incomeQuery = query(IncomeRef);
+    const aggregateSnapshot = await getAggregateFromServer(incomeQuery, {totalIncome: sum("Amount")});
+    const total = aggregateSnapshot.data().totalIncome;
+    console.log("Total Income:", total);
+    document.getElementById("TotalIncome").textContent = `₹${total.toFixed(2)}`;
+  }
+  catch (error) 
+  {
+    console.log("Error fetching income:", error);
+    document.getElementById("TotalIncome").textContent = "₹0.00";
+  }
 }
 
 async function getTotalExpenses() 
 {
-  const querySnapshot = await getDocs(collection(db, "Expense"));
-  let total = 0;
-
-  querySnapshot.forEach(doc => 
+  try 
   {
-    const data = doc.data();
-    const amount = parseFloat(data.Amount);
-    
-    if (!isNaN(amount)) 
-    {
-      total += amount;
-    }
-  });
-
-  document.getElementById("TotalExpense").textContent  = `₹${total.toFixed(2)}`;
-  //console.log("Total Expense:", total);
+    const expenseQuery = query(ExpenseRef);
+    const aggregateSnapshot1 = await getAggregateFromServer(expenseQuery, {totalExpense: sum("Amount")});
+    const total1 = aggregateSnapshot1.data().totalExpense;
+    console.log("Total Expense:", total1);
+    document.getElementById("TotalExpense").textContent = `₹${total1.toFixed(2)}`;
+  }
+  catch (error) 
+  {
+    console.log("Error fetching expese:", error);
+    document.getElementById("TotalExpense").textContent = "₹0.00";
+  }
 }

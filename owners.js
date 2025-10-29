@@ -63,8 +63,8 @@ window.createOwner = async function ()
           WingName: WingName,
           FloorNumber: FloorNumber,
           RoomNo: RoomNo, 
-          Area: Area, 
-          MaintenanceAmount: MaintenanceAmount, 
+          Area: parseFloat(Area),
+          MaintenanceAmount: parseFloat(MaintenanceAmount), 
           MobileNumber: MobileNumber, 
           EmailID: EmailID,
           CreatedDate: new Date()
@@ -81,8 +81,8 @@ window.createOwner = async function ()
           WingName: WingName,
           FloorNumber: FloorNumber,
           RoomNo: RoomNo, 
-          Area: Area, 
-          MaintenanceAmount: MaintenanceAmount, 
+          Area: parseFloat(Area), 
+          MaintenanceAmount: parseFloat(MaintenanceAmount), 
           MobileNumber: MobileNumber, 
           EmailID: EmailID,
           CreatedDate: new Date()

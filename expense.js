@@ -52,7 +52,7 @@ onAuthStateChanged(auth, user =>
                   TrnDate: timeStampTrnDate,
                   PaymentMode: PaymentMode,
                   ReferenceNumber: ReferenceNumber,
-                  Amount: Amount,
+                  Amount: parseFloat(Amount),
                   Comments: Comments,
                   CreatedDate: new Date()
                 });
